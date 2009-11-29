@@ -1,0 +1,19 @@
+h1. ER Fixed Screen Names
+
+Allows the option to disable screen name changing on a member-group basis
+
+h2. Instructions
+
+* Copy ext.er_fixed_screen_names.php to your system/extensions directory
+* Copy lang.er_fixed_screen_names.php to your system/language/english directory
+* Enable the extension in the Extensions Manager
+
+h2. Customization
+
+* You can select which member groups become unable to edit their screen names
+
+h2. Change Log
+
+*Nov 28, 2009: 1.0.0*
+
+* Initial Release

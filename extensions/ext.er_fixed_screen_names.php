@@ -7,16 +7,16 @@
  * /system/extensions/ folder in your ExpressionEngine installation.
  *
  * @package ERFixedScreenNames
- * @version 1.0.0
+ * @version 1.0.1
  * @author Erik Reagan http://erikreagan.com
  * @copyright Copyright (c) 2009 Erik Reagan
  * @see http://erikreagan.com/projects/er-fixed-screen-names/
  */
 
-
-if ( ! defined('EXT')) exit('Invalid file request');
-
-define('EXT_NAME_U','Er_fixed_screen_names');
+if ( ! defined('EXT_NAME_ERFSN') )
+{
+   define('EXT_NAME_ERFSN','Er_fixed_screen_names');
+}
 
 class Er_fixed_screen_names
 {
@@ -24,7 +24,7 @@ class Er_fixed_screen_names
    var $settings = array();
 
    var $name = 'ER Fixed Screen Names';
-   var $version = '1.0.0';
+   var $version = '1.0.1';
    var $description = 'Allows the option to disable screen name changing on a member-group basis';
    var $settings_exist = 'y';
    var $docs_url = 'http://erikreagan.com/projects/er-fixed-screen-names/';
@@ -66,7 +66,7 @@ class Er_fixed_screen_names
 		$settings = FALSE;
 		
 		// check the db for extension settings
-		$query = $DB->query("SELECT settings FROM exp_extensions WHERE enabled = 'y' AND class = '".EXT_NAME_U."' LIMIT 1");
+		$query = $DB->query("SELECT settings FROM exp_extensions WHERE enabled = 'y' AND class = '".EXT_NAME_ERFSN."' LIMIT 1");
 
 		// if there is a row and the row has settings
 		if ($query->num_rows > 0 && $query->row['settings'] != '')
@@ -94,7 +94,7 @@ class Er_fixed_screen_names
       $grav_url = "http://www.gravatar.com/avatar.php?gravatar_id=".md5(strtolower('erik@erikreagan.com'))."&amp;default=".urlencode('http://erikreagan.com/gravatar.jpg')."&amp;size=70";
       
       // Grab the member groups from our current site
-      $member_groups = $DB->query("SELECT group_id,site_id,group_title,can_access_cp FROM exp_member_groups WHERE `site_id` = " . $PREFS->ini("site_id") . " AND `can_access_cp` = 'y'");
+      $member_groups = $DB->query("SELECT group_id,site_id,group_title FROM exp_member_groups WHERE `site_id` = " . $PREFS->ini("site_id"));
       
       // Create an array of our member groups in the format that $settings needs
       foreach ($member_groups->result as $group)
@@ -129,7 +129,7 @@ class Er_fixed_screen_names
                      'action' => 'C=admin'.AMP.'M=utilities'.AMP.'P=save_extension_settings'
                   ),
                array(
-                     'name' => strtolower(EXT_NAME_U)
+                     'name' => strtolower(EXT_NAME_ERFSN)
                   )
             );
       
@@ -203,7 +203,7 @@ class Er_fixed_screen_names
 		$settings = $REGX->xss_clean($_POST);
 
 		// update the settings
-		$query = $DB->query($sql = "UPDATE exp_extensions SET settings = '" . addslashes(serialize($settings)) . "' WHERE class = '".EXT_NAME_U."'");
+		$query = $DB->query($sql = "UPDATE exp_extensions SET settings = '" . addslashes(serialize($settings)) . "' WHERE class = '".EXT_NAME_ERFSN."'");
 	}
    
    
@@ -234,7 +234,7 @@ class Er_fixed_screen_names
                'class'        => get_class($this),
                'method'       => $method,
                'hook'         => $hook,
-               'settings'     => '',
+               'settings'     => serialize(array('groups'=>array(),'check_for_extension_updates'=>'n')),
                'priority'     => 10,
                'version'      => $this->version,
                'enabled'      => "y"
@@ -270,7 +270,7 @@ class Er_fixed_screen_names
 
        $DB->query("UPDATE exp_extensions 
                    SET version = '".$DB->escape_str($this->version)."' 
-                   WHERE class = '".EXT_NAME_U."'");
+                   WHERE class = '".EXT_NAME_ERFSN."'");
    }
    
    
@@ -281,7 +281,7 @@ class Er_fixed_screen_names
    function disable_extension()
    {
        global $DB;
-       $DB->query("DELETE FROM exp_extensions WHERE class = '".EXT_NAME_U."'");
+       $DB->query("DELETE FROM exp_extensions WHERE class = '".EXT_NAME_ERFSN."'");
    }
    
    

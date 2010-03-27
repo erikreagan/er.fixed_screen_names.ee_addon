@@ -14,7 +14,11 @@ h2. Customization
 
 h2. Change Log
 
-*+Nov 29, 2009: 1.0.1+*
++*Mar 27, 2010: 1.0.2*+
+
+* Assigned license to add-on: "Attribution-Share Alike 3.0 Unported":http://creativecommons.org/licenses/by-sa/3.0/
+
+*Nov 29, 2009: 1.0.1*
 
 * Fixed some settings bugs
 * Now shows all member groups in the settings rather than just those which have access to the CP

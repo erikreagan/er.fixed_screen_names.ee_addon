@@ -7,10 +7,11 @@
  * /system/extensions/ folder in your ExpressionEngine installation.
  *
  * @package ERFixedScreenNames
- * @version 1.0.1
+ * @version 1.0.2
  * @author Erik Reagan http://erikreagan.com
  * @copyright Copyright (c) 2009 Erik Reagan
  * @see http://erikreagan.com/projects/er-fixed-screen-names/
+ * @license http://creativecommons.org/licenses/by-sa/3.0/ Attribution-Share Alike 3.0 Unported 
  */
 
 if ( ! defined('EXT_NAME_ERFSN') )
@@ -24,7 +25,7 @@ class Er_fixed_screen_names
    var $settings = array();
 
    var $name = 'ER Fixed Screen Names';
-   var $version = '1.0.1';
+   var $version = '1.0.2';
    var $description = 'Allows the option to disable screen name changing on a member-group basis';
    var $settings_exist = 'y';
    var $docs_url = 'http://erikreagan.com/projects/er-fixed-screen-names/';
